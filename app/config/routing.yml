@@ -1,0 +1,4 @@
+ma_dev_voyages:
+    resource: "@MaDevVoyagesBundle/Resources/config/routing.yml"
+    prefix:   /
+
