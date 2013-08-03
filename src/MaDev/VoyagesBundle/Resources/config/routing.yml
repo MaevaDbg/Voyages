@@ -1,3 +1,7 @@
-ma_dev_voyages_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: MaDevVoyagesBundle:Default:index }
+voyages_country_index:
+    pattern: /pays
+    defaults: { _controller: MaDevVoyagesBundle:Country:index }
+
+voyages_city_index:
+    pattern: /ville
+    defaults: { _controller: MaDevVoyagesBundle:City:index }
