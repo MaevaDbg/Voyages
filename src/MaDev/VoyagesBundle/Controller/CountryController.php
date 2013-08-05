@@ -11,7 +11,7 @@ class CountryController extends Controller {
 
     public function indexAction() {
         
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('MaDevVoyagesBundle:Country');
         $countries = $repo->findAll();
         
@@ -28,7 +28,7 @@ class CountryController extends Controller {
 
         if ($form->isValid()) {
             $country = $form->getData();
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($country);
             $em->flush();
 
@@ -47,7 +47,7 @@ class CountryController extends Controller {
 
         if ($form->isValid()) {
             $country = $form->getData();
-            $em = $this->getDoctrine()->getEntityManager();
+            $em = $this->getDoctrine()->getManager();
             $em->persist($country);
             $em->flush();
 
@@ -60,7 +60,7 @@ class CountryController extends Controller {
     }
 
     public function deleteAction(Country $country) {
-        $em = $this->getDoctrine()->getEntityManager();
+        $em = $this->getDoctrine()->getManager();
         $em->remove($country);
         $em->flush();
         

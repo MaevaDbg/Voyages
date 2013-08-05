@@ -17,3 +17,19 @@ voyages_country_delete:
 voyages_city_index:
     pattern: /ville
     defaults: { _controller: MaDevVoyagesBundle:City:index }
+    
+voyages_city_create:
+    pattern: /ville/ajouter
+    defaults: { _controller: MaDevVoyagesBundle:City:create }
+
+voyages_city_update:
+    pattern: /ville/{city}
+    defaults: { _controller: MaDevVoyagesBundle:City:update }
+    
+voyages_city_delete:
+    pattern: /ville/supprimer/{city}
+    defaults: { _controller: MaDevVoyagesBundle:City:delete }
+
+
+
+
