@@ -31,7 +31,9 @@ class CountryController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($country);
             $em->flush();
-
+            
+            $this->get('voyages.message')->SuccessMessage('Votre pays a bien été ajouté');
+            
             return $this->redirect($this->generateUrl('voyages_country_index'));
         }
 
@@ -51,6 +53,8 @@ class CountryController extends Controller {
             $em->persist($country);
             $em->flush();
 
+            $this->get('voyages.message')->SuccessMessage('Votre pays a bien été modifié');
+            
             return $this->redirect($this->generateUrl('voyages_country_index'));
         }
         
@@ -63,6 +67,8 @@ class CountryController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $em->remove($country);
         $em->flush();
+        
+        $this->get('voyages.message')->SuccessMessage('Votre pays a bien été supprimé');
         
         return $this->redirect($this->generateUrl('voyages_country_index'));
     }

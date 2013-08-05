@@ -2,4 +2,19 @@
 
 {% block body %}
 
+    {% block MessageFlash %}
+        {% for type,message in app.session.flashbag.all %}
+
+            {% for mess in message %}
+                <div class="alert alert-{{ type }}">
+                    {{ mess }}
+                </div>
+            {% endfor %}
+
+        {% endfor %}
+    {% endblock %}
+
+    {% block container %}
+    {% endblock %}
+
 {% endblock %}

@@ -31,7 +31,9 @@ class CityController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($city);
             $em->flush();
-
+            
+            $this->get('voyages.message')->SuccessMessage('Votre ville a bien été ajouté');
+            
             return $this->redirect($this->generateUrl('voyages_city_index'));
         }
 
@@ -51,6 +53,8 @@ class CityController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($city);
             $em->flush();
+            
+            $this->get('voyages.message')->SuccessMessage('Votre ville a bien été modifié');
 
             return $this->redirect($this->generateUrl('voyages_city_index'));
         }
@@ -64,6 +68,8 @@ class CityController extends Controller {
         $em = $this->getDoctrine()->getManager();
         $em->remove($city);
         $em->flush();
+        
+        $this->get('voyages.message')->SuccessMessage('Votre ville a bien été supprimé');
         
         return $this->redirect($this->generateUrl('voyages_city_index'));
     }
