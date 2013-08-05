@@ -19,7 +19,7 @@ abstract class AbstractEntity
     
     /**
      * @var integer
-     * @ORM\Column(type="integer")
+     * @ORM\Column(type="boolean")
      */
     protected $status;
     

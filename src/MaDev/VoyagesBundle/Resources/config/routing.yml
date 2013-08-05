@@ -2,6 +2,18 @@ voyages_country_index:
     pattern: /pays
     defaults: { _controller: MaDevVoyagesBundle:Country:index }
 
+voyages_country_create:
+    pattern: /pays/ajouter
+    defaults: { _controller: MaDevVoyagesBundle:Country:create }
+
+voyages_country_update:
+    pattern: /pays/{country}
+    defaults: { _controller: MaDevVoyagesBundle:Country:update }
+
+voyages_country_delete:
+    pattern: /pays/supprimer/{country}
+    defaults: { _controller: MaDevVoyagesBundle:Country:delete }
+
 voyages_city_index:
     pattern: /ville
     defaults: { _controller: MaDevVoyagesBundle:City:index }

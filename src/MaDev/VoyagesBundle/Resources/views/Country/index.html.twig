@@ -1,2 +1,16 @@
-{# empty Twig template #}
+{% extends 'MaDevVoyagesBundle::base_layout.html.twig'%}
+
+{% block body %}
 <h1>Pays</h1>
+
+<ul>
+    {% for country in countries %}
+        <li>
+            {{ country.name }} - 
+            <a href="{{ path('voyages_country_update', {'country': country.id}) }}">Modifier</a> - 
+            <a href="{{ path('voyages_country_delete', {'country': country.id}) }}">Supprimer</a>
+        </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

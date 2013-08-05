@@ -1,0 +1,12 @@
+{% extends 'MaDevVoyagesBundle::base_layout.html.twig'%}
+
+{% block body %}
+
+    <h1>Ajouter un pays</h1>
+
+    {{ form_start(form, {'method': 'POST', 'attr': {novalidate: 'novalidate'}}) }}
+        {% include 'MaDevVoyagesBundle:Country:form_layout.html.twig' with {'form': form, 'button': 'Ajouter'} %}
+    {{ form_end(form) }}
+
+{% endblock %}
+

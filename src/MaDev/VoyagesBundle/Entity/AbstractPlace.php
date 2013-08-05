@@ -3,6 +3,7 @@ namespace MaDev\VoyagesBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Gedmo\Mapping\Annotation as Gedmo;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * Place
@@ -18,6 +19,7 @@ abstract class AbstractPlace extends AbstractEntity
     /**
      * @var string
      * @ORM\Column(type="string", length=250, nullable=false) 
+     * @Assert\NotBlank()
      */
     protected $name;
     
@@ -36,7 +38,8 @@ abstract class AbstractPlace extends AbstractEntity
     
     /**
      * @var datetime
-     * @ORM\Column(type="datetime", nullable=true)
+     * @ORM\Column(type="date", nullable=true)
+     * @Assert\NotBlank()
      */
     protected $visite_date;
     
