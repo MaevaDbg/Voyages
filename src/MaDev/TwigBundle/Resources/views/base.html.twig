@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>{% block title %}{% endblock %}</title>
+
+        {% block stylesheets %}
+        {% stylesheets
+            '%kernel.root_dir%/../vendor/twitter/bootstrap/less/bootstrap.less'
+            '%kernel.root_dir%/../vendor/twitter/bootstrap/less/responsive.less'
+            'bundles/madevtwig/css/madev-bootstrap.css'
+            filter='lessphp,cssrewrite'
+        %}
+            <link rel="stylesheet" href="{{ asset_url }}" />
+        {% endstylesheets %}  
+        {% endblock %}
+ 
+    </head>
+    <body>
+        {% block menu %}
+        {% endblock %}
+        <div class="container">
+        {% block container %}{% endblock %}
+        </div>
+ 
+        {% block javascripts %}
+        {% javascripts
+            '../vendor/jquery/jquery/jquery-1.9.1.min.js'
+            '../vendor/twitter/bootstrap/js/bootstrap-dropdown.js'
+        %}
+            <script type="text/javascript" src="{{ asset_url }}"></script>
+        {% endjavascripts %}
+        {% endblock %}
+ 
+        <script type="text/javascript">
+            $(document).ready(function() {
+                {% block document_ready %}{% endblock %}
+            });
+        </script>
+    </body>
+</html>

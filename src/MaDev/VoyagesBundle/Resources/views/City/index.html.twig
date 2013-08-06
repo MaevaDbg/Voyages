@@ -1,17 +1,28 @@
 {% extends 'MaDevVoyagesBundle::base_layout.html.twig' %}
 
-{% block container %}
+{% block content %}
 
-<h1>Ville</h1>
-<a href="{{ path('voyages_city_create') }}">Ajouter une ville</a>
-<ul>
-{% for city in cities %}
-    <li>
-        {{ city.name }} - 
-        <a href="{{ path('voyages_city_update', {'city': city.id}) }}">Modifier</a> - 
-        <a href="{{ path('voyages_city_delete', {'city': city.id}) }}">Supprimer</a>
-    </li>
-{% endfor %}
-</ul>
+<h2>Ville</h2>
+
+<a class="btn btn-small btn-info" href="{{ path('voyages_city_create') }}">Ajouter une ville</a>
+<br/><br/>
+<table class="table table-hover">
+    <thead>
+        <th>Pays</th>
+        <th>Ville</th>
+        <th>Date de visite</th>
+    </thead>
+    <tbody>
+    {% for city in cities %}
+        <tr>
+            <td>{{ city.country.name }}</td>
+            <td>{{ city.name }}</td> 
+            <td>{{ city.visitedate|date("d/m/Y") }}</td> 
+            <td><a href="{{ path('voyages_city_update', {'city': city.id}) }}">Modifier</a></td> 
+            <td><a href="{{ path('voyages_city_delete', {'city': city.id}) }}">Supprimer</a></td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 
 {% endblock %}

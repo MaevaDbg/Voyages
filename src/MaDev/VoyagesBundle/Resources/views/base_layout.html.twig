@@ -1,20 +1,33 @@
-{% extends '::base.html.twig'%}
+{% extends 'MaDevTwigBundle::base.html.twig'%}
 
-{% block body %}
 
-    {% block MessageFlash %}
-        {% for type,message in app.session.flashbag.all %}
+{% block menu %}
+    <div class="navbar">
+      <div class="navbar-inner">
+        <a class="brand" href="#">Voyages</a>
+        <ul class="nav">
+          <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Pays<b class="caret"></b></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li><a href="{{ path('voyages_country_index') }}">Liste</a></li>
+                <li><a href="{{ path('voyages_country_create') }}">Ajouter</a></li>
+              </ul>
+          </li>
+          <li class="dropdown">
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#">Ville<b class="caret"></b></a>
+              <ul class="dropdown-menu" role="menu" aria-labelledby="dLabel">
+                <li><a href="{{ path('voyages_city_index') }}">Liste</a></li>
+                <li><a href="{{ path('voyages_city_create') }}">Ajouter</a></li>
+              </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+{% endblock %}
 
-            {% for mess in message %}
-                <div class="alert alert-{{ type }}">
-                    {{ mess }}
-                </div>
-            {% endfor %}
+{% block container %}
 
-        {% endfor %}
-    {% endblock %}
-
-    {% block container %}
+    {% block content %}
     {% endblock %}
 
 {% endblock %}

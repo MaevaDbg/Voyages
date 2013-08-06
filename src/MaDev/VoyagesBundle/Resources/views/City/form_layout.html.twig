@@ -1,6 +1,10 @@
 {{ form_row(form.country, {'label': 'Choisir un pays'}) }}
 {{ form_row(form.name, {'label': 'Nom de la ville'}) }}
 {{ form_row(form.description, {'label': 'Decsription'}) }}
-{{ form_row(form.visite_date, {'label': 'Date d\'arrivée'}) }}
-{{ form_row(form.status, {'label': 'Publier ?'}) }}
-{{ form_row(form.submit, {'label': button}) }}
+{{ form_row(form.visite_date, {'label': 'Date d\'arrivée', 'attr': {'placeholder': 'jj/mm/aaaa'}}) }}
+<label class="checkbox" for="voyagesbundle_citytype_status">A publier ?
+    {{ form_errors(form.status) }}
+    {{ form_widget(form.status) }}
+</label>
+<br/>
+{{ form_row(form.submit, {'label': button, 'attr': {'class': 'btn btn-large btn-info'}}) }}

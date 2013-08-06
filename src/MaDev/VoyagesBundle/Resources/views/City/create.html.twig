@@ -1,11 +1,10 @@
 {% extends 'MaDevVoyagesBundle::base_layout.html.twig' %}
 
-{% block body %}
-
-    <h1>Ajouter une ville</h1>
+{% block content %}
 
     {{ form_start(form) }}
-    {% include 'MaDevVoyagesBundle:City:form_layout.html.twig' with {'form': form, 'button': 'Valider' } %}
+        <legend>Ajouter une ville</legend>
+        {% include 'MaDevVoyagesBundle:City:form_layout.html.twig' with {'form': form, 'button': 'Valider' } %}
     {{ form_end(form) }}
     
 {% endblock %}

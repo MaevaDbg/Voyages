@@ -18,6 +18,7 @@ class AppKernel extends Kernel
             new Sensio\Bundle\FrameworkExtraBundle\SensioFrameworkExtraBundle(),
             new MaDev\VoyagesBundle\MaDevVoyagesBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
+            new MaDev\TwigBundle\MaDevTwigBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {
