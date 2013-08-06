@@ -19,6 +19,7 @@ class AppKernel extends Kernel
             new MaDev\VoyagesBundle\MaDevVoyagesBundle(),
             new Stof\DoctrineExtensionsBundle\StofDoctrineExtensionsBundle(),
             new MaDev\TwigBundle\MaDevTwigBundle(),
+            new MaDev\UploadFileBundle\MaDevUploadFileBundle(),
         );
 
         if (in_array($this->getEnvironment(), array('dev', 'test'))) {

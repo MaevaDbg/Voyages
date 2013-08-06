@@ -1,8 +1,11 @@
-ma_dev_twig:
+madev_twig:
     resource: "@MaDevTwigBundle/Resources/config/routing.yml"
     prefix:   /
 
-ma_dev_voyages:
+madev_voyages:
     resource: "@MaDevVoyagesBundle/Resources/config/routing.yml"
     prefix:   /
 
+madev_upload:
+    resource: "@MaDevUploadFileBundle/Resources/config/routing.yml"
+    prefix:   /

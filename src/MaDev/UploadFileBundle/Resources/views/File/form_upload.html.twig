@@ -1,0 +1,15 @@
+{% extends 'MaDevVoyagesBundle::base_layout.html.twig' %}
+
+{% block content %}
+{{ form_start(form) }}
+    <legend>Uploader des fichiers</legend>
+    {{ form_errors(form) }}
+
+    {{ form_errors(form.files) }}
+        {{ form_widget(form.files, { 'full_name': form.files.vars.full_name ~ '[]', 'attr': { 'multiple': 'multiple' } }) }}
+
+    {{ form_rest(form) }}
+
+    <input type="submit" />
+{{ form_end(form) }}
+{% endblock %}
