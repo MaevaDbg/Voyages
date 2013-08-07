@@ -1,15 +1,20 @@
 {% extends 'MaDevVoyagesBundle::base_layout.html.twig' %}
 
 {% block content %}
-{{ form_start(form) }}
-    <legend>Uploader des fichiers</legend>
-    {{ form_errors(form) }}
 
-    {{ form_errors(form.files) }}
-        {{ form_widget(form.files, { 'full_name': form.files.vars.full_name ~ '[]', 'attr': { 'multiple': 'multiple' } }) }}
+    {{ form_start(form) }}
 
-    {{ form_rest(form) }}
+        <legend>Uploader des fichiers</legend>
+        {{ form_errors(form) }}
 
-    <input type="submit" />
-{{ form_end(form) }}
+        {{ form_errors(form.files) }}
+        {{ form_label(form.files, 'Sélectionnez des fichiers') }}
+        {{ form_widget(form.files, { 'full_name': form.files.vars.full_name ~ '[]', 'attr': { 'multiple': 'multiple'} }) }}
+
+        {{ form_row(form.directory, {'label': 'Liste des dossiers'}) }}
+        {{ form_row(form.dir_name, {'label': 'Nouveau dossier ?'}) }}
+        {{ form_row(form.submit, {'label': 'Uploader', 'attr': {'class': 'btn btn-info'}}) }}
+
+    {{ form_end(form) }}
+        
 {% endblock %}

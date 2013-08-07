@@ -1,3 +1,7 @@
+uploadfile_file_index:
+    pattern: /fichiers
+    defaults: { _controller: "MaDevUploadFileBundle:File:index" }
+
 uploadfile_file_upload:
-    pattern: /uploadfile
+    pattern: /uploader
     defaults: { _controller: "MaDevUploadFileBundle:File:upload" }

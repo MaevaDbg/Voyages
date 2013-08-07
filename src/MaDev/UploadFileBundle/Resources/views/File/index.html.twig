@@ -1,0 +1,13 @@
+{% extends 'MaDevVoyagesBundle::base_layout.html.twig' %}
+
+{% block content %}
+
+    <h2>Mes fichiers</h2>
+
+    {% include 'MaDevVoyagesBundle::messages_layout.html.twig' %}
+    
+    {% for file in files %}
+    <img width="150px" src="{{ asset(file.path ~'/'~ file.name) }}" class="img-polaroid"/>
+    {% endfor %}
+
+{% endblock %}
