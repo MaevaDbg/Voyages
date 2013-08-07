@@ -13,6 +13,12 @@
 
         {{ form_row(form.directory, {'label': 'Liste des dossiers'}) }}
         {{ form_row(form.dir_name, {'label': 'Nouveau dossier ?'}) }}
+        
+        <label class="checkbox" for="form_thumb">Miniature ?
+            {{ form_errors(form.thumb) }}
+            {{ form_widget(form.thumb) }}
+        </label>
+        
         {{ form_row(form.submit, {'label': 'Uploader', 'attr': {'class': 'btn btn-info'}}) }}
 
     {{ form_end(form) }}

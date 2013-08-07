@@ -7,7 +7,11 @@
     {% include 'MaDevVoyagesBundle::messages_layout.html.twig' %}
     
     {% for file in files %}
-    <img width="150px" src="{{ asset(file.path ~'/'~ file.name) }}" class="img-polaroid"/>
+        {% if file.thumbnail is null %}
+            <img width="150px" src="{{ asset(file.path ~'/'~ file.name) }}" class="img-polaroid"/>
+        {% else %}
+            <img src="{{ asset(file.path ~'/'~ file.thumbnail) }}" class="img-polaroid"/>
+        {% endif %}
     {% endfor %}
 
 {% endblock %}

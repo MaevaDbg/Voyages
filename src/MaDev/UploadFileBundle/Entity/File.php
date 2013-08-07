@@ -25,6 +25,13 @@ class File {
      * @ORM\Column(type="string", length=255)
      */
     protected $name;
+    
+    /**
+     * 
+     * @var string
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    protected $thumbnail;
 
     /**
      * 
@@ -75,6 +82,26 @@ class File {
      */
     public function getName() {
         return $this->name;
+    }
+    
+    /**
+     * Set thumbnail
+     *
+     * @param string $thumbnail
+     * @return File
+     */
+    public function setThumbnail($thumbnail) {
+        $this->thumbnail = $thumbnail;
+        return $this;
+    }
+
+    /**
+     * Get thumbnail
+     *
+     * @return string 
+     */
+    public function getThumbnail() {
+        return $this->thumbnail;
     }
 
     /**
