@@ -6,7 +6,7 @@ use Doctrine\ORM\Mapping as ORM;
 use Doctrine\Common\Collections\ArrayCollection;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="MaDev\VoyagesBundle\Repository\CountryRepository")
  */
 class Country extends AbstractPlace {
 
@@ -19,16 +19,37 @@ class Country extends AbstractPlace {
         $this->cities = new ArrayCollection();
     }
 
+    /**
+     * Add cities
+     *
+     * @param City $city
+     * @return Country
+     */
     public function addCity(City $city) {
         $city->setCountry($this);
         $this->cities[] = $city;
         return $this;
     }
 
+    /**
+     * Remove cities
+     *
+     * @param City $city
+     * @return Country
+     */
     public function removeCity(City $city) {
         $city->setCountry(null);
         $this->cities->removeElement($city);
         return $this;
+    }
+
+    /**
+     * Get cities
+     *
+     * @return ArrayCollection 
+     */
+    public function getCities() {
+        return $this->cities;
     }
 
 }

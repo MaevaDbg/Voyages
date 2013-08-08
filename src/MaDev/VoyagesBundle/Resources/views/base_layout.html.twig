@@ -1,10 +1,9 @@
 {% extends 'MaDevTwigBundle::base.html.twig'%}
 
-
 {% block menu %}
     <div class="navbar">
       <div class="navbar-inner">
-        <a class="brand" href="#">Voyages</a>
+        <a class="brand" href="{{ path('voyages_admin_index') }}">Voyages</a>
         <ul class="nav">
           <li class="dropdown">
               <a class="dropdown-toggle" data-toggle="dropdown" href="#">Pays<b class="caret"></b></a>

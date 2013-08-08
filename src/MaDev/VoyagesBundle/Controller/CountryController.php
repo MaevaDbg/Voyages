@@ -15,7 +15,7 @@ class CountryController extends Controller {
         $repo = $em->getRepository('MaDevVoyagesBundle:Country');
         $countries = $repo->findAll();
         
-        return $this->render('MaDevVoyagesBundle:Country:index.html.twig',array(
+        return $this->render('MaDevVoyagesBundle:Country:admin/index.html.twig',array(
             'countries' => $countries
         ));
     }
@@ -37,7 +37,7 @@ class CountryController extends Controller {
             return $this->redirect($this->generateUrl('voyages_country_index'));
         }
 
-        return $this->render('MaDevVoyagesBundle:Country:create.html.twig', array(
+        return $this->render('MaDevVoyagesBundle:Country:admin/create.html.twig', array(
                     'form' => $form->createView()
                 ));
     }
@@ -58,7 +58,7 @@ class CountryController extends Controller {
             return $this->redirect($this->generateUrl('voyages_country_index'));
         }
         
-        return $this->render('MaDevVoyagesBundle:Country:update.html.twig', array(
+        return $this->render('MaDevVoyagesBundle:Country:admin/update.html.twig', array(
                     'form' => $form->createView()
                 ));
     }

@@ -7,7 +7,7 @@ use Doctrine\ORM\Mapping as ORM;
 /**
  * File
  * 
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="MaDev\UploadFileBundle\Repository\FileRepository")
  * 
  */
 class File {

@@ -1,3 +1,0 @@
-ma_dev_twig_homepage:
-    pattern:  /hello/{name}
-    defaults: { _controller: MaDevTwigBundle:Default:index }

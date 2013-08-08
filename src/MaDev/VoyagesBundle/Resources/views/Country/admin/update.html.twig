@@ -5,7 +5,7 @@
     <h1>Modifier un pays</h1>
 
     {{ form_start(form, {'method': 'POST', 'attr': {novalidate: 'novalidate'}}) }}
-        {% include 'MaDevVoyagesBundle:Country:form_layout.html.twig' with {'form': form, 'button': 'Modifier'} %}
+        {% include 'MaDevVoyagesBundle:Country:admin/form_layout.html.twig' with {'form': form, 'button': 'Modifier'} %}
     {{ form_end(form) }}
 
 {% endblock %}

@@ -5,7 +5,7 @@ namespace MaDev\VoyagesBundle\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity
+ * @ORM\Entity(repositoryClass="MaDev\VoyagesBundle\Repository\CityRepository")
  */
 class City extends AbstractPlace {
 

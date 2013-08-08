@@ -1,35 +1,7 @@
-voyages_country_index:
-    pattern: /pays
-    defaults: { _controller: MaDevVoyagesBundle:Country:index }
+madev_voyages_admin:
+    resource: "@MaDevVoyagesBundle/Resources/config/admin/routing.yml"
+    prefix:   /admin/
 
-voyages_country_create:
-    pattern: /pays/ajouter
-    defaults: { _controller: MaDevVoyagesBundle:Country:create }
-
-voyages_country_update:
-    pattern: /pays/{country}
-    defaults: { _controller: MaDevVoyagesBundle:Country:update }
-
-voyages_country_delete:
-    pattern: /pays/supprimer/{country}
-    defaults: { _controller: MaDevVoyagesBundle:Country:delete }
-
-voyages_city_index:
-    pattern: /ville
-    defaults: { _controller: MaDevVoyagesBundle:City:index }
-    
-voyages_city_create:
-    pattern: /ville/ajouter
-    defaults: { _controller: MaDevVoyagesBundle:City:create }
-
-voyages_city_update:
-    pattern: /ville/{city}
-    defaults: { _controller: MaDevVoyagesBundle:City:update }
-    
-voyages_city_delete:
-    pattern: /ville/supprimer/{city}
-    defaults: { _controller: MaDevVoyagesBundle:City:delete }
-
-
-
-
+madev_voyages_front:
+    resource: "@MaDevVoyagesBundle/Resources/config/front/routing.yml"
+    prefix:   /

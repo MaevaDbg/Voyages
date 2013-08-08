@@ -15,7 +15,7 @@ class CityController extends Controller {
         $repo = $em->getRepository('MaDevVoyagesBundle:City');
         $cities = $repo->findAll();
 
-        return $this->render('MaDevVoyagesBundle:City:index.html.twig', array(
+        return $this->render('MaDevVoyagesBundle:City:admin/index.html.twig', array(
                     'cities' => $cities
                 ));
     }
@@ -37,7 +37,7 @@ class CityController extends Controller {
             return $this->redirect($this->generateUrl('voyages_city_index'));
         }
 
-        return $this->render('MaDevVoyagesBundle:City:create.html.twig', array(
+        return $this->render('MaDevVoyagesBundle:City:admin/create.html.twig', array(
                     'form' => $form->createView()
                 ));
     }
@@ -59,7 +59,7 @@ class CityController extends Controller {
             return $this->redirect($this->generateUrl('voyages_city_index'));
         }
 
-        return $this->render('MaDevVoyagesBundle:City:update.html.twig', array(
+        return $this->render('MaDevVoyagesBundle:City:admin/update.html.twig', array(
                     'form' => $form->createView()
                 ));
     }

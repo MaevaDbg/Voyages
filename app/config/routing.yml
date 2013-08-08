@@ -1,11 +1,7 @@
-madev_twig:
-    resource: "@MaDevTwigBundle/Resources/config/routing.yml"
-    prefix:   /
-
 madev_voyages:
     resource: "@MaDevVoyagesBundle/Resources/config/routing.yml"
     prefix:   /
 
 madev_upload:
     resource: "@MaDevUploadFileBundle/Resources/config/routing.yml"
-    prefix:   /
+    prefix:   /admin/
