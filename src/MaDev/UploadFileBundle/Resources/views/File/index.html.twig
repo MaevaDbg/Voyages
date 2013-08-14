@@ -4,6 +4,9 @@
 
     <h2>Mes fichiers</h2>
 
+    <a class="btn btn-small btn-info" href="{{ path('uploadfile_file_upload') }}">Uploader de nouveaux fichiers</a>
+    <br/><br/>
+    
     {% include 'MaDevVoyagesBundle::messages_layout.html.twig' %}
     
     {% for file in files %}

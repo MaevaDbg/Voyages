@@ -6,5 +6,15 @@
     {{ form_errors(form.status) }}
     {{ form_widget(form.status) }}
 </label>
+
+<legend>Ajouter des photos</legend>
+<div id="voyagesbundle_citytype_image" class="row">
+    {% for image in form.image.children %}
+        <div class="span2">
+        {{ form_widget(image) }}
+        <label for="{{ image.vars.id }}"><img src="{{ asset(image.vars.label) }}" /></label>
+        </div>
+    {% endfor %}
+</div>
 <br/>
 {{ form_row(form.submit, {'label': button, 'attr': {'class': 'btn btn-large btn-info'}}) }}

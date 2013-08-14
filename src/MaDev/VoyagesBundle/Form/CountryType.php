@@ -20,7 +20,7 @@ class CountryType extends AbstractType
                 'required' => true
             ))
             ->add('status', 'checkbox', array(
-                'required' => true
+                'required' => false
             ))
             ->add('submit', 'submit')
         ;

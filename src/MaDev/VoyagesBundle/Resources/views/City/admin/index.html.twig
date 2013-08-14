@@ -6,6 +6,9 @@
 
 <a class="btn btn-small btn-info" href="{{ path('voyages_city_create') }}">Ajouter une ville</a>
 <br/><br/>
+
+{% include 'MaDevVoyagesBundle::messages_layout.html.twig' %}
+
 <table class="table table-hover">
     <thead>
         <th>Pays</th>
@@ -15,7 +18,7 @@
     <tbody>
     {% for city in cities %}
         <tr>
-            <td>{{ city.country.name }}</td>
+            <td>{% if city.country == null %}A définir{% else %}{{ city.country.name }}{% endif %}</td>
             <td>{{ city.name }}</td> 
             <td>{{ city.visitedate|date("d/m/Y") }}</td> 
             <td><a href="{{ path('voyages_city_update', {'city': city.id}) }}">Modifier</a></td> 

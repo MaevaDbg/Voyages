@@ -3,6 +3,7 @@
 namespace MaDev\UploadFileBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use MaDev\VoyagesBundle\Entity\City;
 
 /**
  * File
@@ -54,8 +55,24 @@ class File {
      * 
      */
     protected $description;
-
+    
     /**
+     *
+     * @ORM\ManyToOne(targetEntity="MaDev\VoyagesBundle\Entity\City", inversedBy="images")
+     * @ORM\JoinColumn(onDelete="SET NULL")
+     */
+    protected $city;
+    
+    public function setCity(City $city = null){
+        $this->city = $city;
+        return $this;
+    }
+
+    public function __toString() {
+        return $this->getPath()."/".$this->getThumbnail();
+    }
+
+        /**
      * Get id
      *
      * @return integer 

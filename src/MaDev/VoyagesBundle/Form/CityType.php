@@ -5,6 +5,7 @@ namespace MaDev\VoyagesBundle\Form;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use MaDev\VoyagesBundle\Form\EventListener\AddImageFieldSubscriber;
 
 class CityType extends AbstractType
 {
@@ -28,6 +29,7 @@ class CityType extends AbstractType
                 'expanded' => false,
                 'multiple' => false
             ))
+            ->addEventSubscriber(new AddImageFieldSubscriber())
             ->add('submit', 'submit')
         ;
     }

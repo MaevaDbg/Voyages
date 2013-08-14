@@ -11,7 +11,7 @@ use Doctrine\Common\Collections\ArrayCollection;
 class Country extends AbstractPlace {
 
     /**
-     * @ORM\OneToMany(targetEntity="City", mappedBy="country")  
+     * @ORM\OneToMany(targetEntity="City", mappedBy="country")
      */
     protected $cities;
 
