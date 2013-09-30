@@ -26,20 +26,13 @@ class File {
      * @ORM\Column(type="string", length=255)
      */
     protected $name;
-    
-    /**
-     * 
-     * @var string
-     * @ORM\Column(type="string", length=255, nullable=true)
-     */
-    protected $thumbnail;
 
     /**
      * 
      * @var text
      * @ORM\Column(type="string", length=255)
      */
-    protected $path;
+    protected $directory;
 
     /**
      *
@@ -69,7 +62,7 @@ class File {
     }
 
     public function __toString() {
-        return $this->getPath()."/".$this->getThumbnail();
+        return $this->getDirectory()."/".$this->getThumbnail();
     }
 
         /**
@@ -100,45 +93,25 @@ class File {
     public function getName() {
         return $this->name;
     }
-    
+   
     /**
-     * Set thumbnail
+     * Set directory
      *
-     * @param string $thumbnail
+     * @param string $directory
      * @return File
      */
-    public function setThumbnail($thumbnail) {
-        $this->thumbnail = $thumbnail;
+    public function setDirectory($directory) {
+        $this->directory = $directory;
         return $this;
     }
 
     /**
-     * Get thumbnail
+     * Get directory
      *
      * @return string 
      */
-    public function getThumbnail() {
-        return $this->thumbnail;
-    }
-
-    /**
-     * Set path
-     *
-     * @param string $path
-     * @return File
-     */
-    public function setPath($path) {
-        $this->path = $path;
-        return $this;
-    }
-
-    /**
-     * Get path
-     *
-     * @return string 
-     */
-    public function getPath() {
-        return $this->path;
+    public function getDirectory() {
+        return $this->directory;
     }
 
     /**

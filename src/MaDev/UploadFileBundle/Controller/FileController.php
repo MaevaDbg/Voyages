@@ -6,6 +6,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Finder\Finder;
 use MaDev\UploadFileBundle\Entity\File;
+use MaDev\UploadFileBundle\Form\Type\FileType;
 
 /**
  * File controller.
@@ -42,40 +43,27 @@ class FileController extends Controller {
         }
 
         //Upload form
-        $form = $this->createFormBuilder()
-                ->add('directory', 'choice', array(
-                    'choices' => $img_dirs,
-                    'required' => false,
-                    'expanded' => false,
-                    'empty_value' => 'Choose a directory',
-                ))
-                ->add('dir_name', 'text', array(
-                    'required' => false
-                ))
-                ->add('files', 'file', array('mapped' => false))
-                ->add('thumb', 'checkbox', array(
-                    'required' => false
-                ))
-                ->add('submit', 'submit')
-                ->getForm();
-
-
+        $options = array('img_dir' => $img_dirs);
+        $form = $this->createForm(new FileType(),null,$options);
+        
         $form->handleRequest($request);
 
         //Traitement du formulaire
         if ($form->isValid()) {
             $data = $form->getData();
-
+            $dir = $data->getDirectory();
+            $new_dir = $form->get('new_directory')->getData();
+            
             //Define image directory
-            if (isset($data['dir_name'])) {
-                $img_dir_name = $data['dir_name'];
-            } elseif ($data['directory'] != null) {
-                $img_dir_name = $data['directory'];
+            if (isset($new_dir)) {
+                $img_dir_name = $new_dir;
+            } elseif ($dir != null) {
+                $img_dir_name = $dir;
             } else {
                 $img_dir_name = 'divers';
             }
 
-            $files = $form['files']->getData();
+            $files = $form->get('files')->getData();
             $em = $this->getDoctrine()->getManager();
 
             foreach ($files as $file) {
@@ -84,21 +72,19 @@ class FileController extends Controller {
                 
                 $new_file = new File;
                 $new_file->setName($file->getClientOriginalName());
-                $new_file->setPath('uploads/' . $img_dir_name);
+                $new_file->setDirectory('uploads/' . $img_dir_name);
                 
-                if ($data['thumb']) {
-                    list($orig_w, $orig_h) = getimagesize($file_upload);
-                    $dims = $this->image_resize_dimensions($orig_w, $orig_h, '150', '150', true);
-                    list($dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h) = $dims;
-                    $thumb = imagecreatetruecolor($dst_w, $dst_h);
-                    $image = imagecreatefromjpeg($file_upload);
+                //Je fais une miniature
+                list($orig_w, $orig_h) = getimagesize($file_upload);
+                $dims = $this->image_resize_dimensions($orig_w, $orig_h, '150', '150', true);
+                list($dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h) = $dims;
+                $thumb = imagecreatetruecolor($dst_w, $dst_h);
+                $image = imagecreatefromjpeg($file_upload);
 
-                    imagecopyresampled($thumb, $image, $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h);
-                    $thumb_name = 'thumb_'.$file->getClientOriginalName();
-                    imagejpeg($thumb, __DIR__ . '/../../../../web/uploads/' . $img_dir_name . '/'.$thumb_name,90);
-                    
-                    $new_file->setThumbnail($thumb_name);
-                }
+                imagecopyresampled($thumb, $image, $dst_x, $dst_y, $src_x, $src_y, $dst_w, $dst_h, $src_w, $src_h);
+                $thumb_name = 'thumb_'.$file->getClientOriginalName();
+                imagejpeg($thumb, __DIR__ . '/../../../../web/uploads/' . $img_dir_name . '/'.$thumb_name,90);
+
 
                 $em->persist($new_file);
             }
