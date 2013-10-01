@@ -33,6 +33,8 @@ class File {
      * @ORM\Column(type="string", length=255)
      */
     protected $directory;
+    
+    protected $new_directory;
 
     /**
      *
@@ -112,6 +114,26 @@ class File {
      */
     public function getDirectory() {
         return $this->directory;
+    }
+    
+    /**
+     * Set new directory
+     *
+     * @param string $new_directory
+     * @return File
+     */
+    public function setNewDirectory($new_directory) {
+        $this->new_directory = $new_directory;
+        return $this;
+    }
+
+    /**
+     * Get new directory
+     *
+     * @return string 
+     */
+    public function getNewDirectory() {
+        return $this->new_directory;
     }
 
     /**

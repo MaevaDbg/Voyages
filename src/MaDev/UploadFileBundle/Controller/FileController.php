@@ -72,7 +72,7 @@ class FileController extends Controller {
                 
                 $new_file = new File;
                 $new_file->setName($file->getClientOriginalName());
-                $new_file->setDirectory('uploads/' . $img_dir_name);
+                $new_file->setDirectory($img_dir_name);
                 
                 //Je fais une miniature
                 list($orig_w, $orig_h) = getimagesize($file_upload);

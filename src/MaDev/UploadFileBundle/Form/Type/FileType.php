@@ -5,6 +5,9 @@ namespace MaDev\UploadFileBundle\Form\Type;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolverInterface;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Component\Validator\ExecutionContextInterface;
+use MaDev\UploadFileBundle\Entity\File;
 
 class FileType extends AbstractType
 {
@@ -18,8 +21,7 @@ class FileType extends AbstractType
                 'empty_value' => 'Choose a directory',
             ))
             ->add('new_directory', 'text', array(
-                'required' => false,
-                'mapped' => false
+                'required' => false
             ))
             ->add('files', 'file', array(
                 'mapped' => false
@@ -32,8 +34,21 @@ class FileType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'MaDev\UploadFileBundle\Entity\File',
-            'img_dir' => null
+            'img_dir' => null,
+            'constraints' => array(new Assert\Callback(array(array($this, 'validateDirectory'))))
         ));
+    }
+    
+    public function validateDirectory(File $file, ExecutionContextInterface $context)
+    {
+        $dir = $file->getDirectory();
+        $new_dir = $file->getNewDirectory();
+        if(empty($dir) && empty($new_dir)){
+            $context->addViolationAt(
+                'directory',
+                'il faut définir un dossier pour y stocker les images'
+            );
+        }
     }
 
     public function getName()
