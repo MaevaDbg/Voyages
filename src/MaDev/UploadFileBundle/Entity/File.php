@@ -34,6 +34,10 @@ class File {
      */
     protected $directory;
     
+    /**
+     *
+     * @var text
+     */
     protected $new_directory;
 
     /**
@@ -58,10 +62,6 @@ class File {
      */
     protected $city;
     
-    public function setCity(City $city = null){
-        $this->city = $city;
-        return $this;
-    }
 
     public function __toString() {
         return $this->getDirectory()."/".$this->getThumbnail();
@@ -174,6 +174,17 @@ class File {
      */
     public function getDescription() {
         return $this->description;
+    }
+    
+    /**
+     * Set city
+     *
+     * @param City $city
+     * @return File
+     */
+    public function setCity(City $city = null){
+        $this->city = $city;
+        return $this;
     }
 
 }

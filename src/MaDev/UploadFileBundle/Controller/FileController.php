@@ -29,9 +29,11 @@ class FileController extends Controller {
      * Upload multiple files
      */
     public function uploadAction(Request $request) {
+        
+        //Chemin vers mon dossier ou seront stockés les images
         $img_path = $this->container->getParameter('kernel.root_dir') . '/../web/uploads/';
 
-        //Je récupère la liste des sous dossiers de upload
+        //Je récupère la liste des sous dossiers de mon dossier upload
         $finder = new Finder();
         $finder->directories()->in($img_path);
         if ($finder->count() == 0) {
@@ -41,28 +43,25 @@ class FileController extends Controller {
                 $img_dirs[$dir->getRelativePathname()] = $dir->getRelativePathname();
             }
         }
-
-        //Upload form
         $options = array('img_dir' => $img_dirs);
-        $form = $this->createForm(new FileType(),null,$options);
         
+        $form = $this->createForm(new FileType(), null, $options);
         $form->handleRequest($request);
 
         //Traitement du formulaire
         if ($form->isValid()) {
             $data = $form->getData();
-            $dir = $data->getDirectory();
-            $new_dir = $form->get('new_directory')->getData();
             
             //Define image directory
+            $dir = $data->getDirectory();
+            $new_dir = $form->get('new_directory')->getData();
             if (isset($new_dir)) {
-                $img_dir_name = $new_dir;
-            } elseif ($dir != null) {
+                $img_dir_name = $this->normalise($new_dir);
+            } 
+            if ($dir != null) {
                 $img_dir_name = $dir;
-            } else {
-                $img_dir_name = 'divers';
             }
-
+            
             $files = $form->get('files')->getData();
             $em = $this->getDoctrine()->getManager();
 
@@ -116,7 +115,7 @@ class FileController extends Controller {
      * @param bool $crop Optional, default is false. Whether to crop image or resize.
      * @return bool|array False, on failure. Returned array matches parameters for imagecopyresampled() PHP function.
      */
-    protected function image_resize_dimensions($orig_w, $orig_h, $dest_w, $dest_h, $crop = false) {
+    private function image_resize_dimensions($orig_w, $orig_h, $dest_w, $dest_h, $crop = false) {
 
         if ($orig_w <= 0 || $orig_h <= 0)
             return false;
@@ -163,6 +162,28 @@ class FileController extends Controller {
         // the return array matches the parameters to imagecopyresampled()
         // int dst_x, int dst_y, int src_x, int src_y, int dst_w, int dst_h, int src_w, int src_h
         return array(0, 0, (int) $s_x, (int) $s_y, (int) $new_w, (int) $new_h, (int) $crop_w, (int) $crop_h);
+    }
+    
+    /**
+    * Normalise la chaine de caractères.
+    *
+    * @param string $str Chaine de caractères à normaliser.
+    * @return string Chaine de caractères normalisée.
+    */
+    private function normalise($str) {
+        $table = array(
+          'Š' => 'S', 'š' => 's', 'Đ' => 'Dj', 'đ' => 'dj', 'Ž' => 'Z', 'ž' => 'z', 'Č' => 'C', 'č' => 'c', 'Ć' => 'C', 'ć' => 'c',
+          'À' => 'A', 'Á' => 'A', 'Â' => 'A', 'Ã' => 'A', 'Ä' => 'A', 'Å' => 'A', 'Æ' => 'A', 'Ç' => 'C', 'È' => 'E', 'É' => 'E',
+          'Ê' => 'E', 'Ë' => 'E', 'Ì' => 'I', 'Í' => 'I', 'Î' => 'I', 'Ï' => 'I', 'Ñ' => 'N', 'Ò' => 'O', 'Ó' => 'O', 'Ô' => 'O',
+          'Õ' => 'O', 'Ö' => 'O', 'Ø' => 'O', 'Ù' => 'U', 'Ú' => 'U', 'Û' => 'U', 'Ü' => 'U', 'Ý' => 'Y', 'Þ' => 'B', 'ß' => 'Ss',
+          'à' => 'a', 'á' => 'a', 'â' => 'a', 'ã' => 'a', 'ä' => 'a', 'å' => 'a', 'æ' => 'a', 'ç' => 'c', 'è' => 'e', 'é' => 'e',
+          'ê' => 'e', 'ë' => 'e', 'ì' => 'i', 'í' => 'i', 'î' => 'i', 'ï' => 'i', 'ð' => 'o', 'ñ' => 'n', 'ò' => 'o', 'ó' => 'o',
+          'ô' => 'o', 'õ' => 'o', 'ö' => 'o', 'ø' => 'o', 'ù' => 'u', 'ú' => 'u', 'û' => 'u', 'ý' => 'y', 'ý' => 'y', 'þ' => 'b',
+          'ÿ' => 'y', 'Ŕ' => 'R', 'ŕ' => 'r', ' ' => '-', '\'' => '-'
+        );
+
+        $str = strtr($str, $table);
+        return strtolower($str);
     }
 
 }
