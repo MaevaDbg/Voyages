@@ -10,9 +10,9 @@
         {{ form_errors(form.files) }}
         {{ form_label(form.files, 'Sélectionnez des fichiers') }}
         {{ form_widget(form.files, { 'full_name': form.files.vars.full_name ~ '[]', 'attr': { 'multiple': 'multiple'} }) }}
-
+        
         {{ form_row(form.directory, {'label': 'Liste des dossiers'}) }}
-        {{ form_row(form.new_directory, {'label': 'Nouveau dossier ?'}) }}
+        {{ form_row(form.new_directory, {'label': 'Créer un nouveau dossier ?'}) }}
 
         {{ form_row(form.submit, {'label': 'Uploader', 'attr': {'class': 'btn btn-info'}}) }}
 

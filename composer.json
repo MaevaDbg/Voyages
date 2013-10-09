@@ -36,7 +36,8 @@
         "jquery/jquery": "1.9.1",
         "twitter/bootstrap": "2.3.*",
         "leafo/lessphp": "dev-master",
-        "friendsofsymfony/user-bundle": "~2.0@dev"
+        "friendsofsymfony/user-bundle": "~2.0@dev",
+        "imagine/imagine": "~0.5.0"
     },
     "scripts": {
         "post-install-cmd": [

@@ -13,12 +13,14 @@ class FileType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
+        $choice_val = !empty($options['directories']) ? 'Sélectionner un dossier' : 'Pas de dossier';
+        
         $builder
             ->add('directory', 'choice', array(
-                'choices' => $options['img_dir'],
+                'choices' => $options['directories'],
                 'required' => false,
                 'expanded' => false,
-                'empty_value' => 'Choose a directory',
+                'empty_value' => $choice_val,
             ))
             ->add('new_directory', 'text', array(
                 'required' => false
@@ -34,7 +36,7 @@ class FileType extends AbstractType
     {
         $resolver->setDefaults(array(
             'data_class' => 'MaDev\UploadFileBundle\Entity\File',
-            'img_dir' => null,
+            'directories' => null,
             'constraints' => array(new Assert\Callback(array(array($this, 'validateDirectory'))))
         ));
     }
