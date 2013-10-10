@@ -10,7 +10,9 @@
     {% include 'MaDevVoyagesBundle::messages_layout.html.twig' %}
     
     {% for file in files %}
-        <img src="{{ asset('uploads/'~ file.directory ~'/thumb_'~ file.name) }}" class="img-polaroid"/>
+    <a href="{{ path('uploadfile_file_update', { 'id': file.id }) }}">
+        <img src="{{ asset('uploads/'~ file.directory ~'/thumb_'~ file.name) }}"/>
+    </a>
     {% endfor %}
 
 {% endblock %}

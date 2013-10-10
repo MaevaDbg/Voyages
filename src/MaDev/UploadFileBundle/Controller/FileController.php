@@ -6,13 +6,14 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\Finder\Finder;
 use MaDev\UploadFileBundle\Entity\File;
+use MaDev\UploadFileBundle\Form\Type\FileUploadType;
 use MaDev\UploadFileBundle\Form\Type\FileType;
 use Imagine\Gd\Imagine;
 use Imagine\Filter\Transformation;
 use Imagine\Image\Box;
 
 /**
- * File controller.
+ * File controller
  *
  */
 class FileController extends Controller {
@@ -26,6 +27,36 @@ class FileController extends Controller {
         return $this->render('MaDevUploadFileBundle:File:index.html.twig', array(
                     'files' => $files
                 ));
+    }
+    
+    /**
+     * Update
+     */
+    public function updateAction(Request $request, $id){
+        $em = $this->getDoctrine()->getManager();
+        $repo = $em->getRepository('MaDevUploadFileBundle:File');
+        $image = $repo->find($id);
+        
+        if (!$image) {
+            throw $this->createNotFoundException('Cette image n\'existe pas');
+        }
+        
+        $form = $this->createForm(new FileType(),$image);
+        $form->handleRequest($request);
+        
+        if ($form->isValid()) {
+            $image = $form->getData();
+            $em->persist($image);
+            $em->flush();
+            
+            $this->get('voyages.message')->SuccessMessage('Votre image a bien été modifié');
+            return $this->redirect($this->generateUrl('uploadfile_file_index'));
+        }
+        
+        return $this->render('MaDevUploadFileBundle:File:edit.html.twig', array(
+                'image' => $image,
+                'form' => $form->createView()
+            ));
     }
 
     /**
@@ -47,14 +78,14 @@ class FileController extends Controller {
         } 
         
         $options = array('directories' => $directories);
-        $form = $this->createForm(new FileType(), null, $options);
+        $form = $this->createForm(new FileUploadType(), null, $options);
         $form->handleRequest($request);
 
         //Traitement du formulaire
         if ($form->isValid()) {
             $data = $form->getData();
             
-            //Define image directory
+            //Definition du dossier d'upload
             $dir = $data->getDirectory();
             $new_dir = $form->get('new_directory')->getData();
             if (isset($new_dir)) {
@@ -78,7 +109,7 @@ class FileController extends Controller {
                 $image = $imagine->open($file_info['dirname']."/".$file_info['basename']);
                 $image->save($img_path, array('quality' => 100));
                 $transformation = new Transformation();
-                $transformation->thumbnail(new Box(150,150),'outbound')->save($thumb_path, array('quality' => 80));
+                $transformation->thumbnail(new Box(150,150),'outbound')->save($thumb_path, array('quality' => 100));
                 $transformation->apply($image);
                 //Je persiste les données de mon image en BDD
                 $new_file = new File;
@@ -98,7 +129,6 @@ class FileController extends Controller {
     }
 
    
-    
     /**
     * Normalise la chaine de caractères.
     *

@@ -3,6 +3,7 @@
 namespace MaDev\UploadFileBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Gedmo\Mapping\Annotation as Gedmo;
 use MaDev\VoyagesBundle\Entity\City;
 
 /**
@@ -54,6 +55,21 @@ class File {
      * 
      */
     protected $description;
+    
+    /**
+     * @var Datetime
+     * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="create")
+     * 
+     */
+    protected $date_creation;
+    
+    /**
+     * @var Datetime
+     * @ORM\Column(type="datetime")
+     * @Gedmo\Timestampable(on="update")
+     */
+    protected $date_update;
     
     /**
      *
@@ -174,6 +190,50 @@ class File {
      */
     public function getDescription() {
         return $this->description;
+    }
+    
+    /**
+     * Set date_creation
+     *
+     * @param \DateTime $dateCreation
+     * @return File
+     */
+    public function setDateCreation($dateCreation)
+    {
+        $this->date_creation = $dateCreation;   
+        return $this;
+    }
+
+    /**
+     * Get date_creation
+     *
+     * @return \DateTime 
+     */
+    public function getDateCreation()
+    {
+        return $this->date_creation;
+    }
+
+    /**
+     * Set date_update
+     *
+     * @param \DateTime $dateUpdate
+     * @return File
+     */
+    public function setDateUpdate($dateUpdate)
+    {
+        $this->date_update = $dateUpdate;  
+        return $this;
+    }
+
+    /**
+     * Get date_update
+     *
+     * @return \DateTime 
+     */
+    public function getDateUpdate()
+    {
+        return $this->date_update;
     }
     
     /**

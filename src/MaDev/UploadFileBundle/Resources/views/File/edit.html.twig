@@ -1,0 +1,13 @@
+{% extends 'MaDevVoyagesBundle::base_layout.html.twig' %}
+
+{% block content %}
+
+    {{ form_start(form) }}
+
+        {{ form_errors(form) }}
+        {{ form_row(form.description, {'label': 'Description'}) }}
+        {{ form_row(form.order, {'label': 'Ordre'}) }}
+
+    {{ form_end(form) }}
+
+{% endblock %}

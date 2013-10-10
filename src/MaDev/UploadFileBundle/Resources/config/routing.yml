@@ -3,5 +3,9 @@ uploadfile_file_index:
     defaults: { _controller: "MaDevUploadFileBundle:File:index" }
 
 uploadfile_file_upload:
-    pattern: /uploader
+    pattern: /upload
     defaults: { _controller: "MaDevUploadFileBundle:File:upload" }
+    
+uploadfile_file_update:
+    pattern: /{id}/update
+    defaults: { _controller: "MaDevUploadFileBundle:File:update" }
