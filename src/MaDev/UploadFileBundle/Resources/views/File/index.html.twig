@@ -9,10 +9,17 @@
     
     {% include 'MaDevVoyagesBundle::messages_layout.html.twig' %}
     
-    {% for file in files %}
-    <a href="{{ path('uploadfile_file_update', { 'id': file.id }) }}">
-        <img src="{{ asset('uploads/'~ file.directory ~'/thumb_'~ file.name) }}"/>
-    </a>
+    <ul>
+    {% for key, files in list %}
+        <li>
+            <h3>{{key|capitalize}}</h3>
+            {% for file in files %}
+                <a href="{{ path('uploadfile_file_update', { 'id': file.id }) }}">
+                    <img src="{{ asset('uploads/'~ file.directory ~'/thumb_'~ file.name) }}"/>
+                </a>
+            {% endfor %}
+        </li>
     {% endfor %}
-
+    </ul>
+    
 {% endblock %}

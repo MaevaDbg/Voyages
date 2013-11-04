@@ -22,10 +22,10 @@ class FileController extends Controller {
 
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('MaDevUploadFileBundle:File');
-        $files = $repo->findAll();
+        $list = $repo->listByDirectory();
 
         return $this->render('MaDevUploadFileBundle:File:index.html.twig', array(
-                    'files' => $files
+                    'list' => $list
                 ));
     }
     
