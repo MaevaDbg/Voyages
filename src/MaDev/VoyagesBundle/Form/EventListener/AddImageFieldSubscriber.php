@@ -28,11 +28,11 @@ class AddImageFieldSubscriber implements EventSubscriberInterface
                 'class' => 'MaDevUploadFileBundle:File',
                 'expanded' => true,
                 'multiple' => true,
+                'by_reference' => false,
                 'query_builder' => function(EntityRepository $er) {
                     return $er->createQueryBuilder('f')
                         ->leftJoin('f.city','c')
-                        ->where('f.thumbnail IS NOT NULL')
-                        ->andWhere('c IS NULL');
+                        ->Where('c IS NULL');
                 },
             ));
         }else{
@@ -40,9 +40,10 @@ class AddImageFieldSubscriber implements EventSubscriberInterface
                 'class' => 'MaDevUploadFileBundle:File',
                 'expanded' => true,
                 'multiple' => true,
+                'by_reference' => false,
                 'query_builder' => function(EntityRepository $er) {
                     $qb = $er->createQueryBuilder('f')
-                        ->innerJoin('f.city','c');
+                        ->leftJoin('f.city','c');
                     return $qb;
                 },
             ));

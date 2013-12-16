@@ -9,21 +9,23 @@ use Doctrine\Common\Collections\ArrayCollection;
 /**
  * @ORM\Entity(repositoryClass="MaDev\VoyagesBundle\Repository\CityRepository")
  */
-class City extends AbstractPlace {
+class City extends AbstractPlace
+{
 
     /**
      * @ORM\ManyToOne(targetEntity="Country", inversedBy="cities")
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     protected $country;
-    
+
     /**
      *
-     * @ORM\OneToMany(targetEntity="MaDev\UploadFileBundle\Entity\File", mappedBy="city")
+     * @ORM\OneToMany(targetEntity="MaDev\UploadFileBundle\Entity\File", mappedBy="city", cascade={"persist", "remove", "merge"})
      */
     protected $images;
-    
-    public function __construct() {
+
+    public function __construct()
+    {
         $this->images = new ArrayCollection();
     }
 
@@ -33,7 +35,8 @@ class City extends AbstractPlace {
      * @param Country $country
      * @return City
      */
-    public function setCountry(Country $country = null) {
+    public function setCountry(Country $country = null)
+    {
         $this->country = $country;
         return $this;
     }
@@ -43,22 +46,26 @@ class City extends AbstractPlace {
      *
      * @return Country 
      */
-    public function getCountry() {
+    public function getCountry()
+    {
         return $this->country;
     }
-    
-    public function addImage(File $image){
+
+    public function addImage(File $image)
+    {
         $image->setCity($this);
         $this->images[] = $image;
         return $this;
     }
-    
-    public function removeImage(File $image){
+
+    public function removeImage(File $image)
+    {
         $image->setCity(null);
         $this->images->removeElement($image);
     }
-    
-    public function getImage(){
+
+    public function getImage()
+    {
         return $this->images;
     }
 

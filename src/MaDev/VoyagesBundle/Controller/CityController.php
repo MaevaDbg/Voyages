@@ -7,10 +7,11 @@ use Symfony\Component\HttpFoundation\Request;
 use MaDev\VoyagesBundle\Form\CityType;
 use MaDev\VoyagesBundle\Entity\City;
 
-class CityController extends Controller {
+class CityController extends Controller
+{
 
-    public function indexAction() {
-
+    public function indexAction()
+    {
         $em = $this->getDoctrine()->getManager();
         $repo = $em->getRepository('MaDevVoyagesBundle:City');
         $cities = $repo->findAll();
@@ -20,7 +21,8 @@ class CityController extends Controller {
                 ));
     }
 
-    public function createAction(Request $request) {
+    public function createAction(Request $request)
+    {
         $form = $this->createForm(new CityType());
 
         $form->handleRequest($request);
@@ -31,9 +33,9 @@ class CityController extends Controller {
             $em = $this->getDoctrine()->getManager();
             $em->persist($city);
             $em->flush();
-            
+
             $this->get('voyages.message')->SuccessMessage('Votre ville a bien été ajouté');
-            
+
             return $this->redirect($this->generateUrl('voyages_city_index'));
         }
 
@@ -42,36 +44,36 @@ class CityController extends Controller {
                 ));
     }
 
-    public function updateAction(City $city, Request $request) {
+    public function updateAction(City $city, Request $request)
+    {
         $form = $this->createForm(new CityType(), $city);
 
         $form->handleRequest($request);
 
         if ($form->isValid()) {
-            $city = $form->getData();
-
             $em = $this->getDoctrine()->getManager();
-            $em->persist($city);
+            $em->persist($form->getData());
             $em->flush();
-            
+
             $this->get('voyages.message')->SuccessMessage('Votre ville a bien été modifié');
 
             return $this->redirect($this->generateUrl('voyages_city_index'));
         }
-
         return $this->render('MaDevVoyagesBundle:City:admin/update.html.twig', array(
                     'form' => $form->createView()
                 ));
     }
 
-    public function deleteAction(City $city) {
+    public function deleteAction(City $city)
+    {
         $em = $this->getDoctrine()->getManager();
         $em->remove($city);
         $em->flush();
-        
+
         $this->get('voyages.message')->SuccessMessage('Votre ville a bien été supprimé');
-        
+
         return $this->redirect($this->generateUrl('voyages_city_index'));
     }
 
 }
+

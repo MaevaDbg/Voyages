@@ -12,7 +12,7 @@
     {% for image in form.image.children %}
         <div class="span2">
         {{ form_widget(image) }}
-        <label for="{{ image.vars.id }}"><img src="{{ asset(image.vars.label) }}" /></label>
+        <label for="{{ image.vars.name }}"><img src="{{ asset(image.vars.label) }}" /></label>
         </div>
     {% endfor %}
 </div>

@@ -73,17 +73,17 @@ class File {
     
     /**
      *
-     * @ORM\ManyToOne(targetEntity="MaDev\VoyagesBundle\Entity\City", inversedBy="images")
+     * @ORM\ManyToOne(targetEntity="MaDev\VoyagesBundle\Entity\City", inversedBy="images", cascade={"persist", "remove", "merge"})
      * @ORM\JoinColumn(onDelete="SET NULL")
      */
     protected $city;
     
 
     public function __toString() {
-        return $this->getDirectory()."/".$this->getThumbnail();
+        return "uploads/".$this->getDirectory()."/thumb_".$this->getName();
     }
 
-        /**
+    /**
      * Get id
      *
      * @return integer 
@@ -243,6 +243,7 @@ class File {
      * @return File
      */
     public function setCity(City $city = null){
+        
         $this->city = $city;
         return $this;
     }
